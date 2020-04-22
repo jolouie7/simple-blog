@@ -12,6 +12,9 @@ const PORT = process.env.PORT || 5000;
 console.log("starting server");
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
+//setup routes
+app.use("/posts", require("./routes/postRoutes.js"));
+
 //setup mongoose
 console.log("Connecting to MongoDB");
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
@@ -19,6 +22,6 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   console.log("MongoDB connection established");
 });
 
-app.get("/", (req, res) => {
-  res.send("hello world")
-})
+// app.get("/", (req, res) => {
+//   res.send("hello world")
+// })
