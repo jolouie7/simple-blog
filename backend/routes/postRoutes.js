@@ -34,23 +34,23 @@ router.post("/", async (req, res) => {
 });
 
 //patch req
-router.patch("/:id", (req, res) => {
-  const post = {
-    title: req.body.title,
-    createdAt: Date.now(),
-    tags: req.body.tags,
-    html: req.body.html
-  }
-  Post.findByIdAndUpdate({_id: req.params.id}, post, {useFindAndModify: false}, (err, post) => {
-    if(err) {
-      console.error(err)
-      res.json({
-        error: err
-      })
-    }
-    res.json(post)
-  })
-})
+// router.patch("/:id", (req, res) => {
+//   const post = {
+//     title: req.body.title,
+//     createdAt: Date.now(),
+//     tags: req.body.tags,
+//     html: req.body.html
+//   }
+//   Post.findByIdAndUpdate({_id: req.params.id}, post, {useFindAndModify: false}, (err, post) => {
+//     if(err) {
+//       console.error(err)
+//       res.json({
+//         error: err
+//       })
+//     }
+//     res.json(post)
+//   })
+// })
 
 //put req
 // router.put("/:id", (req, res) => {
@@ -59,6 +59,16 @@ router.patch("/:id", (req, res) => {
 //     res.send("Post updated.")
 //   })
 // })
+
+router.patch("/:id", async (req, res) => {
+  try {
+    await Post.findByIdAndUpdate(req.params.id, req.body, { useFindAndModify: false });
+    const savedPost = await Post.save();
+    res.send(savedPost);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 //delete post
 router.delete("/:id", (req, res) => {
