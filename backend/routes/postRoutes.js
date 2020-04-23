@@ -13,11 +13,24 @@ router.post("/", async (req, res) => {
   // save post model
   try {
     const savedPost = await newPost.save();
-    console.log(savedPost);
-    res.end("finished req")
+    res.json(savedPost);
   } catch (err) {
     console.error(err);
   }
 });
+
+router.get("/", async (req, res) => {
+  const posts = await Post.find();
+  res.json(posts);
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.json(post);
+  } catch (err) {
+    console.error(err);
+  }
+})
 
 module.exports = router;
