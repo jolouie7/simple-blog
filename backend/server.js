@@ -11,6 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//create session
 app.use(
   cookieSession({
     name: "simple-blog-session",
@@ -55,7 +56,7 @@ app.get(
 );
 
 // logout route
-app.get("logout", (req, res) => {
+app.get("/logout", (req, res) => {
   req.session = null;
   req.logout();
   res.redirect("/");
