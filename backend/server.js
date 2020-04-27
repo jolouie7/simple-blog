@@ -3,21 +3,41 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const passport = require("passport");
+const cookieSession = require("cookie-session");
+require("./passportSetup");
 
 //setup express
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(
+  cookieSession({
+    name: "simple-blog-session",
+    keys: ["key1", "key2"],
+  })
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
+// move to sepreate file to be more organized
+const isLoggedIn = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.sendStatus(401);
+  }
+}
+
 // setup routes
 app.use("/posts", require("./routes/postRoutes.js"));
+// when logging out
+app.get("/", (req, res) => res.send("You are not logged in!"));
 // if google login failed
 app.get("/failed", (req, res) => res.send("You failed to login"));
 // if google login success
-app.get("/success", (req, res) => res.send(`Welcome ${req.user.email}!`));
+app.get("/success", isLoggedIn, (req, res) => res.send(`Welcome ${req.user.name}!`));
 
 // TODO: Do something with this! You can put it into a sepreate route file
 app.get(
@@ -33,6 +53,14 @@ app.get(
     res.redirect("/success");
   }
 );
+
+// logout route
+app.get("logout", (req, res) => {
+  req.session = null;
+  req.logout();
+  res.redirect("/");
+})
+
 // setup server
 const PORT = process.env.PORT || 5000;
 console.log("starting server");
