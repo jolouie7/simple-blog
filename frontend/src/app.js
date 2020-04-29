@@ -15,9 +15,6 @@ function App() {
         // setLoading("true");
         const response = await fetch("http://localhost:5000/posts");
         const json = await response.json()
-        // json.map(post => {
-        //   console.log(post.title)
-        // })
         setPosts(json.map(post => {
           return post
         }))

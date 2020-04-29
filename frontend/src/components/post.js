@@ -29,18 +29,32 @@ import {
 } from "reactstrap";
 
 const Post = (post) => {
-  const { title, tags, html, createdAt } = post.post;
+  console.log(post)
+  const { title, tags, html, createdAt, _id } = post.post;
+
+  // ! Fix end of JSON input problem
+  // able to delete post but get an error
+  function deletePost() {
+    fetch('http://localhost:5000/posts/' + _id, {
+      method: "DELETE",
+    })
+      .then((res) => res.text())
+      .then((res) => console.log(res));
+  }
+
   return (
-    <div style={{width:"30%", textAlign:"center"}}>
+    <div style={{ width: "30%", textAlign: "center" }}>
       <Card>
         <CardHeader>{title}</CardHeader>
         <CardBody>
           <CardTitle>{createdAt}</CardTitle>
           <CardTitle>{tags}</CardTitle>
-          <CardText>
-            {html}
-          </CardText>
-          <Button>Go somewhere</Button>
+          <CardText>{html}</CardText>
+          <CardText>{_id || "------undefined------"}</CardText>
+          <Button style={{ margin: "8px" }}>Edit Post</Button>
+          <Button style={{ margin: "8px" }} color="danger" onClick={deletePost}>
+            Delete Post
+          </Button>
         </CardBody>
       </Card>
     </div>
