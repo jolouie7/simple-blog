@@ -43,14 +43,14 @@ const Post = (props) => {
   }
 
   return (
-    <div style={{ width: "30%", textAlign: "center" }}>
+    <div style={{ width: "30%", textAlign: "center", margin: "1rem auto" }}>
       <Card>
         <CardHeader>{title}</CardHeader>
         <CardBody>
           <CardTitle>{createdAt}</CardTitle>
           <CardTitle>{tags}</CardTitle>
           <CardText>{html}</CardText>
-          <CardText>{_id || "------undefined------"}</CardText>
+          {/* <CardText>{_id || "------undefined------"}</CardText> */}
           <Button style={{ margin: "8px" }}>Edit Post</Button>
           <Button style={{ margin: "8px" }} color="danger" onClick={deletePost}>
             Delete Post
