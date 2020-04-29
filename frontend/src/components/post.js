@@ -28,9 +28,9 @@ import {
   CardText,
 } from "reactstrap";
 
-const Post = (post) => {
-  console.log(post)
-  const { title, tags, html, createdAt, _id } = post.post;
+const Post = (props) => {
+  console.log(props)
+  const { title, tags, html, createdAt, _id } = props.post;
 
   // ! Fix end of JSON input problem
   // able to delete post but get an error

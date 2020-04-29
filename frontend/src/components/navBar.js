@@ -15,6 +15,7 @@ import {
   DropdownItem,
   NavbarText,
 } from "reactstrap";
+import createPosts from "../components/createPosts";
 
 const NavbarComponent = (props) => {
   function createPost() {
@@ -40,7 +41,7 @@ const NavbarComponent = (props) => {
               <NavLink href="/">All Posts</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/">Create Posts</NavLink>
+              <NavLink href="/CreatePost">Create Posts</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/">My Posts</NavLink>

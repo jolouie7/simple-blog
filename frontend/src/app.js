@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Post from "./components/post"
 import NavbarComponent from "./components/navBar";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import CreatePost from "./components/createPosts";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -37,6 +38,9 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/CreatePost">
+            <CreatePost />
+          </Route>
           <Route path="/">
             {posts.map((post, index) => (
               <Post post={post} key={index} />
