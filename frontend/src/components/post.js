@@ -30,10 +30,10 @@ import {
 
 const Post = (props) => {
   console.log(props)
-  const { title, tags, html, createdAt, _id } = props.post;
+  const { title, tags, html, createdAt, _id, email } = props.post;
 
-  // ! Fix end of JSON input problem
-  // able to delete post but get an error
+  // ! Redirect or refresh the page for the user when the post gets deleted. Only the writer of that post should be able to delete
+  // TODO: Add update, account functionality and email with twilio email
   function deletePost() {
     fetch('http://localhost:5000/posts/' + _id, {
       method: "DELETE",
@@ -50,6 +50,7 @@ const Post = (props) => {
           <CardTitle>{createdAt}</CardTitle>
           <CardTitle>{tags}</CardTitle>
           <CardText>{html}</CardText>
+          <CardText>{email}</CardText>
           {/* <CardText>{_id || "------undefined------"}</CardText> */}
           <Button style={{ margin: "8px" }}>Edit Post</Button>
           <Button style={{ margin: "8px" }} color="danger" onClick={deletePost}>

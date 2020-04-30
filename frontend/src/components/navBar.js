@@ -47,7 +47,9 @@ const NavbarComponent = (props) => {
               <NavLink href="/">My Posts</NavLink>
             </NavItem>
           </Nav>
-          <NavbarText>User</NavbarText>
+          <NavbarText>
+            Login
+          </NavbarText>
         </Collapse>
       </Navbar>
     </div>
