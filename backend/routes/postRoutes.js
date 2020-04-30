@@ -17,11 +17,11 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   // retrieve the data from the req
-  const { title, createdAt, tags, html } = req.body;
+  const { title, createdAt, tags, html, email } = req.body;
 
   // construct the post model
   const newPost = new Post({
-    title, createdAt, tags, html
+    title, createdAt, tags, html, email
   });
 
   // save post model

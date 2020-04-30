@@ -33,6 +33,8 @@ const isLoggedIn = (req, res, next) => {
 
 // setup routes
 app.use("/posts", require("./routes/postRoutes.js"));
+// get users
+app.use("/users", require("./routes/userRoutes.js"));
 // when logging out
 app.get("/", (req, res) => res.send("You are not logged in!"));
 // if google login failed
